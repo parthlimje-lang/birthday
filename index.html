@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+}
+
+/* Intro Screen */
+#intro {
+    text-align: center;
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+    font-size: 36px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Button */
+#playBtn {
+    background: white;
+    color: #ff4b7d;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.08); }
+}
+
+/* Slideshow */
+#slideshow {
+    display: none;
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+#slideshow img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: none;
+}
+
+#slideshow img.active {
+    display: block;
+    animation: slideFade 1.5s;
+}
+
+@keyframes slideFade {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Love Message Overlay */
+#loveText {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    background: rgba(0,0,0,0.35);
+    padding: 8px;
+    animation: fadeText 3s;
+}
+
+@keyframes fadeText {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 18px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    to {
+        transform: translateY(-800px);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- STEP 1 -->
+<div id="intro">
+    <h1>🎉 Happy Birthday My Love ❤️</h1>
+    <p>You are my favorite person forever 💖</p>
+    <button id="playBtn">🎵 Play Our Song</button>
+</div>
+
+<!-- STEP 2 & 3 -->
+<div id="slideshow">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img1.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img2.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img3.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img4.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img5.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img6.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img7.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img8.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img9.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img10.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img11.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img12.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img13.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img14.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img15.jpg.jpeg""="">
+    <img src="C:\Users\Parth\OneDrive\Desktop\indexed.html\img16.jpg.jpeg""="">
+    
+    
+    <div id="loveText"></div>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="C:\Users\Parth\OneDrive\Desktop\indexed.html\music.mp3.mpeg" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("playBtn");
+const intro = document.getElementById("intro");
+const slideshow = document.getElementById("slideshow");
+const loveText = document.getElementById("loveText");
+
+const messages = [
+    "Every moment with you is special ❤️",
+    "You make my world brighter ✨",
+    "I am so lucky to have you 💕",
+    "My heart belongs to you forever 💖"
+];
+
+let slides = document.querySelectorAll("#slideshow img");
+let index = 0;
+let msgIndex = 0;
+
+btn.addEventListener("click", () => {
+    music.play();
+    intro.style.display = "none";
+    slideshow.style.display = "block";
+    startSlideshow();
+    startHearts();
+});
+
+function startSlideshow() {
+    setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+
+        loveText.innerText = messages[msgIndex];
+        msgIndex = (msgIndex + 1) % messages.length;
+    }, 3000);
+}
+
+/* Floating Hearts */
+function startHearts() {
+    setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.innerHTML = "❤️";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
+    }, 350);
+}
+</script>
+
+</body>
+</html>
